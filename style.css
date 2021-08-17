@@ -4,33 +4,35 @@
   box-sizing: border-box;
 }
 
-html{
+html {
   font-size: 62.5%;
 }
 
-main{
+main {
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
-  background: url(./images/blob-scene-haikei.svg) no-repeat;
+  background: url(./images/blob-scene-haikei.svg) no-repeat center;
   background-size: cover;
-  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* hyperlinks have a weird color, so we deactivate the weird color here */
-a, a:visited, a:hover, a:active {
+/* anchors can have weird color, so we deactivate the weird color here */
+/* a,
+a:visited,
+a:hover,
+a:active {
   color: inherit;
-}
+} */
 
 .glass {
   min-height: 80vh;
-  width: 60%;
+  width: 70%;
   background: linear-gradient(
-    to right bottom, 
-    rgba(255,255,255, 0.6), 
-    rgba(255,255,255,0.2)
+    to right bottom,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.2)
   );
   backdrop-filter: blur(2rem);
   border-radius: 2rem;
@@ -40,9 +42,9 @@ a, a:visited, a:hover, a:active {
 
 .solid {
   background: linear-gradient(
-    to right bottom, 
-    rgba(255,255,255, 0.5), 
-    rgba(255,255,255, 0.3)
+    to right bottom,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.3)
   );
   border-radius: 2rem;
   color: #426696;
@@ -58,11 +60,10 @@ a, a:visited, a:hover, a:active {
   justify-content: space-evenly;
   text-align: center;
 }
-.links {
-  flex: 0.5;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+.profile > .avatar {
+  width: 9.6rem;
+  border-style: solid;
+  border-radius: 50%;
 }
 .profile {
   color: inherit;
@@ -70,10 +71,11 @@ a, a:visited, a:hover, a:active {
 .profile h3 {
   font-weight: normal;
 }
-.avatar {
-  width: 9.6rem;
-  border-style: solid;
-  border-radius: 50%;
+.links {
+  flex: 0.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .content {
@@ -86,8 +88,6 @@ a, a:visited, a:hover, a:active {
   grid-template-rows: repeat(3, 100%);
   grid-template-columns: repeat(2, 100%);
 
-  
-
   /* set content to auto hide when overflowing. add nice scroll effect! */
   overflow: hidden;
   scroll-behavior: smooth;
@@ -97,6 +97,61 @@ a, a:visited, a:hover, a:active {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* all children should now move relative to their respective page */
+  position: relative;
+}
+.page > footer {
+  /* position in corner and center page number */
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* set up size of page number */
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.nav-link {
+  border-radius: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+  /* font settings */
+  font-family: inherit;
+  font-size: 16px;
+  /* background: linear-gradient(
+    to right bottom,
+    rgba(60, 174, 250, 0.6),
+    rgba(60, 175, 250, 0.2)
+  ); */
+  background: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 0.7) 0%,
+    rgba(148, 187, 233, 0.3) 100%
+  );
+  color: black;
+  min-width: 80px;
+  padding: 8px 10px;
+}
+.nav-link:hover {
+  filter: brightness(70%);
+}
+.nav-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #ced7eb;
+}
+
+/* we specifically want the next buttons to be on the right,
+   and the previous buttons on the left relative to their page */
+.page > .nav-link.next {
+  position: absolute;
+  right: 5%;
+}
+.page > .nav-link.prev {
+  position: absolute;
+  left: 5%;
 }
 
 #about-2 {
@@ -104,3 +159,6 @@ a, a:visited, a:hover, a:active {
   grid-row: 2 / 3;
 }
 
+.page iframe {
+  padding: 10px;
+}
