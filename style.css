@@ -12,6 +12,23 @@ html {
   color: #002b40;
 }
 
+/* additional google icon settings */
+.material-icons-round.md-18 {
+  font-size: 18px;
+}
+.material-icons-round.md-24 {
+  font-size: 24px;
+}
+.material-icons-round.md-36 {
+  font-size: 36px;
+}
+.material-icons-round.md-48 {
+  font-size: 48px;
+}
+.material-icons-round {
+  vertical-align: middle;
+}
+
 main {
   min-height: 100vh;
   background: url(./images/blue-haikei.svg) no-repeat center;
@@ -33,15 +50,18 @@ h3 {
   font-size: 2.5rem;
   font-weight: 400;
 }
-h4,
-p {
+h4 {
   font-size: 2rem;
   font-weight: lighter;
 }
+p {
+  font-size: 1.8rem;
+  font-weight: normal;
+}
 
 .glass {
-  min-height: 80vh;
-  width: 80%;
+  height: 80vh;
+  width: 80vw;
   background: linear-gradient(
     to right bottom,
     rgba(255, 255, 255, 0.7),
@@ -63,6 +83,10 @@ p {
   );
   border-radius: 2rem;
   flex: 1;
+  /* width can grow and shrink but only within this range */
+  max-width: 40rem;
+  min-width: 28.5rem;
+  min-height: 58rem;
   /* align content inside the dashboard */
   display: flex;
   flex-direction: column;
@@ -106,49 +130,51 @@ p {
 /* End of Dashboard Section */
 
 /* Beginning of Content Section */
-.content {
+.page-viewer {
   /* place after the dashboard */
   flex: 2;
 
   display: grid;
   grid-auto-flow: column;
-  /* count of rows is the amount of different main pages */
-  grid-template-rows: repeat(3, 100%);
   /* count of columns is the max page count for all rows */
   grid-template-columns: repeat(2, 100%);
-
+  /* count of rows is the amount of different main pages */
+  grid-template-rows: repeat(4, 100%);
+  grid-template-areas:
+    "home ."
+    ". about"
+    "projects ."
+    ". contact";
   /* set content to auto hide when overflowing. add nice scroll effect! */
   overflow: hidden;
   scroll-behavior: smooth;
+}
+
+/* obnoxious, but I'm out of ideas */
+#home-1 {
+  grid-area: home;
+}
+#about-1,
+#about-2 {
+  grid-area: about;
+}
+#projects-1 {
+  grid-area: projects;
+}
+#contact-1 {
+  grid-area: contact;
 }
 
 .page {
   /* Set up page style */
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   /* all children should now move relative to their respective page */
   position: relative;
-}
 
-/* Target the immediate decendant of a page 
-   we want all page elements to show the white bg,
-   so we set that up here */
-.page > * {
-  background: linear-gradient(
-    to right bottom,
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0.8)
-  );
-  border-radius: 2rem;
-  color: #002b40;
-  margin: 2rem;
-  padding: 2rem;
-  font-weight: 400;
-  font-size: 1.5rem;
-}
-.page {
   /* set default to be hidden, so when pages are selected they fade in */
   visibility: hidden;
   opacity: 0;
@@ -161,6 +187,29 @@ p {
   opacity: 1;
 }
 
+/* Target the immediate decendants of a page 
+   we want all page elements to show the white bg,
+   so we set that up here */
+.page > * {
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.8)
+  );
+  border-radius: 2rem;
+  color: #002b40;
+  margin: 2rem;
+  padding: 2rem;
+  font-weight: lighter;
+  font-size: 1.5rem;
+}
+
+.page-node h2 {
+  /* since we want icons after headers, set them to
+     place after the heading and align in the middle */
+  display: inline-block;
+  vertical-align: middle;
+}
 .page footer {
   /* position self in the corner of the parent page,
      parent uses relative position to get this right */
@@ -170,7 +219,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* manually set the page number to  */
+  /* manually set the page number border  */
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
@@ -188,6 +237,7 @@ p {
   color: black;
   min-width: 8rem;
   padding: 0.8rem 1rem;
+  margin: 0.5rem 0;
 }
 /* link -> visited -> hover -> active */
 .nav-link:hover {
@@ -206,11 +256,4 @@ p {
 .nav-link.prev {
   position: absolute;
   left: 0%;
-}
-
-/* we need to set the pages individually since they aren't
-   laid out linearly  */
-#about-2 {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
 }

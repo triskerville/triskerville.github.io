@@ -11,6 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./style.css" />
   </head>
 
@@ -21,7 +25,7 @@
           <div class="profile">
             <img class="avatar" src="./images/Profile.jpg" alt="Profile" />
             <h1>Tristan Baskerville</h1>
-            <h3>Software Engineer</h3>
+            <h3>Software Developer</h3>
           </div>
 
           <hr class="line-break" />
@@ -31,11 +35,12 @@
             <a class="nav-link" href="#home-1">Home</a>
             <a class="nav-link" href="#about-1">About</a>
             <a class="nav-link" href="#projects-1">Projects</a>
+            <a class="nav-link" href="#contact-1">Contact Me</a>
           </div>
         </div>
-        <div class="content">
+        <div class="page-viewer">
           <section class="page" id="home-1">
-            <div>
+            <div class="page-content">
               <h2>Home</h2>
               <hr class="line-break-left" />
               <p>
@@ -60,7 +65,7 @@
                 any bugs, send me a message! I'd love to hear from you.
               </p>
             </div>
-            <a class="nav-link next" href="#about-2">Next Page</a>
+            <a class="nav-link next" href="#about-2">&gt;</a>
             <footer>
               <h4>One</h4>
             </footer>
@@ -68,15 +73,17 @@
           <section class="page" id="about-2">
             <div>
               <h2>About</h2>
+              <hr class="line-break-left" />
+              <p>This section is just to test multiple pages.</p>
             </div>
-            <a class="nav-link prev" href="#about-1">Prev. Page</a>
+            <a class="nav-link prev" href="#about-1">&lt;</a>
             <footer>
               <h4>Two</h4>
             </footer>
           </section>
 
           <section class="page" id="projects-1">
-            <iframe
+            <!-- <iframe
               width="560"
               height="315"
               src="https://www.youtube-nocookie.com/embed/3Qtoe79ojpc"
@@ -84,7 +91,42 @@
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
-            />
+            /> -->
+            <div>
+              <h2>Projects</h2>
+              <hr class="line-break-left" />
+              <p>
+                This section HAD a YouTube Embed, <br />
+                but it broke the rest of my site. Thanks, YouTube.
+              </p>
+            </div>
+            <footer>
+              <h4>One</h4>
+            </footer>
+          </section>
+
+          <section class="page" id="contact-1">
+            <div>
+              <h2>Contact Me!</h2>
+              <hr class="line-break-left" />
+              <p>
+                I'd love to hear from you!<br />
+                If you want to find me on other platforms,
+                <br />
+                check out some of the links provided.
+              </p>
+            </div>
+            <div class="page-node">
+              <h2>Email</h2>
+              <span class="material-icons-round md-36">email</span>
+
+              <hr class="line-break-left" />
+              <h3>
+                <!-- I don't want to paste my email as plain text, 
+                     so ideally this should protext against spam to an extent -->
+                tristan.dev<span style="display: none">spam</span>@outlook.com
+              </h3>
+            </div>
             <footer>
               <h4>One</h4>
             </footer>
