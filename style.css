@@ -133,27 +133,32 @@ p {
 .page-container {
   /* place after the dashboard */
   flex: 2;
-
+  /* set content to auto hide when overflowing. add nice scroll effect! */
+  overflow: hidden;
+  scroll-behavior: smooth;
+  /* we use a grid to order our pages within the viewer */
   display: grid;
   grid-auto-flow: column;
-  /* count of columns is the max page count for all rows */
+  /* each page takes up 100% of the viewer, and we use an arbitrary amount
+     of columns based on our design goals */
   grid-template-columns: repeat(3, 100%);
-  /* count of rows is the amount of different main pages */
+  /* same idea here, each page needs 100% of size, and we the count is
+     home + count of other pages */
   grid-template-rows: repeat(4, 100%);
+  /* this is my solution after pulling my hair out. I like the zig-zag feel
+     with page nagivation, hence why they are ordered like that */
   grid-template-areas:
     "home . ."
     ". . about"
     ". projects ."
     ". . contact";
-  /* set content to auto hide when overflowing. add nice scroll effect! */
-  overflow: hidden;
-  scroll-behavior: smooth;
 }
-
-/* obnoxious, but I'm out of ideas */
+/* we need to manually set each page to the grid location it will occupy */
 #home-1 {
   grid-area: home;
-  /* force home to always be visible */
+  /* without javascript, theres no way to set a default page, so we need to
+     make the home always visible. when the page initially loads, the user will
+     see the home page. this removes transitions but it's not a huge deal */
   visibility: visible;
   opacity: 1;
 }
@@ -172,12 +177,13 @@ p {
   /* Set up page style */
   height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+
   align-items: center;
-  justify-content: center;
+
   /* all children should now move relative to their respective page */
   position: relative;
-
+  padding: 1rem;
   /* set default to be hidden, so when pages are selected they fade in */
   visibility: hidden;
   opacity: 0;
@@ -190,11 +196,42 @@ p {
   visibility: visible;
   opacity: 1;
 }
+.page footer {
+  /* position self in the corner of the parent page,
+     parent uses relative position to get this right */
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* manually set the page number border  */
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+
+.page-break {
+  padding: 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.page-break.main {
+  flex: 2;
+  align-items: flex-end;
+}
+.page-break.side {
+  flex: 1;
+  align-items: flex-start;
+}
 
 /* Target the immediate decendants of a page 
    we want all page elements to show the white bg,
    so we set that up here */
-.page > * {
+.page .page-node {
   background: linear-gradient(
     to right bottom,
     rgba(255, 255, 255, 0.4),
@@ -202,7 +239,6 @@ p {
   );
   border-radius: 2rem;
   color: #002b40;
-  margin: 2rem;
   padding: 2rem;
   font-weight: lighter;
   font-size: 1.5rem;
@@ -213,20 +249,6 @@ p {
      place after the heading and align in the middle */
   display: inline-block;
   vertical-align: middle;
-}
-.page footer {
-  /* position self in the corner of the parent page,
-     parent uses relative position to get this right */
-  position: absolute;
-  bottom: 0%;
-  right: 0%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* manually set the page number border  */
-  width: 5rem;
-  height: 5rem;
-  border-radius: 50%;
 }
 
 .nav-link {
