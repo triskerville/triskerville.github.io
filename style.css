@@ -56,7 +56,7 @@ h4 {
   font-weight: lighter;
 }
 p {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: normal;
 }
 
@@ -88,6 +88,7 @@ p {
   max-width: 40rem;
   min-width: 28.5rem;
   /* min-height: 58rem; */
+  padding: 1rem;
   /* align content inside the dashboard */
   display: flex;
   flex-direction: column;
@@ -144,27 +145,17 @@ p {
   grid-template-columns: repeat(3, 100%);
   /* same idea here, each page needs 100% of size, and we the count is
      home + count of other pages */
-  grid-template-rows: repeat(4, 100%);
+  grid-template-rows: repeat(3, 100%);
   /* this is my solution after pulling my hair out. I like the zig-zag feel
      with page nagivation, hence why they are ordered like that */
   grid-template-areas:
     "home . ."
-    ". . about"
-    ". projects ."
-    ". . contact";
+    ". . projects"
+    ". contact .";
 }
 /* we need to manually set each page to the grid location it will occupy */
 #home-1 {
   grid-area: home;
-  /* without javascript, theres no way to set a default page, so we need to
-     make the home always visible. when the page initially loads, the user will
-     see the home page. this removes transitions but it's not a huge deal */
-  visibility: visible;
-  opacity: 1;
-}
-#about-1,
-#about-2 {
-  grid-area: about;
 }
 #projects-1 {
   grid-area: projects;
@@ -184,18 +175,8 @@ p {
   /* all children should now move relative to their respective page */
   position: relative;
   padding: 1rem;
-  /* set default to be hidden, so when pages are selected they fade in */
-  visibility: hidden;
-  opacity: 0;
-  /* might need to be redone for browser support */
-  transition: visibility 0ms, cubic-bezier(0.04, 0.69, 0.99, 0.65) 300ms,
-    opacity 300ms;
 }
-.page:target {
-  /* unhide selected page*/
-  visibility: visible;
-  opacity: 1;
-}
+
 .page footer {
   /* position self in the corner of the parent page,
      parent uses relative position to get this right */
@@ -216,16 +197,24 @@ p {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
-.page-break.main {
-  flex: 2;
+.page-break.main-left {
+  flex: 1.5;
   align-items: flex-end;
 }
-.page-break.side {
+.page-break.side-right {
   flex: 1;
   align-items: flex-start;
+}
+.page-break.main-right {
+  flex: 1.5;
+  align-items: flex-start;
+}
+.page-break.side-left {
+  flex: 1;
+  align-items: flex-end;
 }
 
 /* Target the immediate decendants of a page 
@@ -240,15 +229,27 @@ p {
   border-radius: 2rem;
   color: #002b40;
   padding: 2rem;
+  margin: 1rem 0;
   font-weight: lighter;
   font-size: 1.5rem;
+  position: relative;
 }
 
-.page-node h2 {
+.page-node h2,
+.page-node h4 {
   /* since we want icons after headers, set them to
      place after the heading and align in the middle */
   display: inline-block;
   vertical-align: middle;
+}
+
+.page-node.project {
+  padding-right: 8rem;
+}
+.page-node.project > .nav-link {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
 }
 
 .nav-link {
@@ -258,10 +259,9 @@ p {
   /* font settings */
   font-family: inherit;
   font-size: 1.75rem;
-  font-weight: 400;
+  font-weight: 500;
   background: #00b092;
   color: black;
-  min-width: 8rem;
   padding: 0.8rem 1rem;
   margin: 0.5rem 0;
 }
